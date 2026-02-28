@@ -1,0 +1,22 @@
+{
+    "name": "better-box-comments-cli",
+    "version": "1.0.0",
+    "description": "CLI tool to generate ASCII box comments",
+    "main": "boxCore.js",
+    "bin": {
+        "box-comment": "./bin/box-comment.js"
+    },
+    "keywords": [
+        "comments",
+        "box",
+        "ascii"
+    ],
+    "scripts": {
+        "test": "node index.js --help"
+    },
+    "author": "DHayk",
+    "license": "MIT",
+    "engines": {
+        "node": ">=14"
+    }
+}
