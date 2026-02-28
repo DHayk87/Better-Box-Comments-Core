@@ -26,5 +26,8 @@
     "bugs": {
         "url": "https://github.com/DHayk87/Better-Box-Comments-Core/issues"
     },
-    "homepage": "https://github.com/DHayk87/Better-Box-Comments-Core#readme"
+    "homepage": "https://github.com/DHayk87/Better-Box-Comments-Core#readme",
+    "dependencies": {
+        "clipboardy": "^2.3.0"
+    }
 }

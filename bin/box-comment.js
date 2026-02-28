@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const path = require("path");
+const clipboardy = require("clipboardy");
 const { generateBox } = require("../boxCore");
 
 function showHelp() {
@@ -14,6 +15,7 @@ Options:
   --length <number>   Total box width (default: 80)
   --indent <number>   Left indentation (default: 2)
   --file <path>       Read text from a file instead of arguments/stdin
+  --no-copy           Do not copy the result to the clipboard
   --help              Show this help menu
 
 Examples:
@@ -34,6 +36,7 @@ async function run() {
         tag: null,
         length: 80,
         indentation: 2,
+        copy: true,
     };
 
     let textParts = [];
@@ -45,6 +48,7 @@ async function run() {
         else if (args[i] === "--length") options.length = parseInt(args[++i], 10);
         else if (args[i] === "--indent") options.indentation = parseInt(args[++i], 10);
         else if (args[i] === "--file" || args[i] === "-f") filePath = args[++i];
+        else if (args[i] === "--no-copy") options.copy = false;
         else if (!args[i].startsWith("--")) textParts.push(args[i]);
     }
 
@@ -76,7 +80,20 @@ async function run() {
         }
     }
 
-    console.log(generateBox(text, options));
+    const result = generateBox(text, options);
+    console.log(result);
+
+    if (options.copy) {
+        try {
+            clipboardy.writeSync(result);
+            // Only log if in a TTY to avoid messing up pipes
+            if (process.stdout.isTTY) {
+                console.log("\n(Copied to clipboard!)");
+            }
+        } catch (err) {
+            console.error(`Warning: Could not copy to clipboard: ${err.message}`);
+        }
+    }
 }
 
 run();
