@@ -24,3 +24,4 @@ All notable changes to "better-box-comments-cli" will be documented in this file
 ## [1.0.1] - 2026-03-01
 
 - Initial release of Better Box Comments CLI with Default, Hash, Equals, and Double presets.
+
