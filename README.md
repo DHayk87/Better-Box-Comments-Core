@@ -50,22 +50,31 @@ box-comment "This is a critical alert" --style Double --tag ALERT
 
 ## ⚙️ Options
 
-| Flag             | Description                                          | Default   |
-| :--------------- | :--------------------------------------------------- | :-------- |
-| `--style <name>` | Border style (`Default`, `Hash`, `Equals`, `Double`) | `Default` |
-| `--tag <text>`   | Add a label to the top border (e.g. `TODO`, `ALERT`) | —         |
-| `--length <n>`   | Total box width in characters                        | `80`      |
-| `--indent <n>`   | Left side indentation spaces                         | `2`       |
-| `--no-copy`      | Disable automatic copying to clipboard               | —         |
-| `--help`         | Show the help menu                                   | —         |
+| Flag | Short | Description | Default |
+| :--- | :--- | :--- | :--- |
+| `--style <name>` | `-s` | Border style (`Default`, `Hash`, `Equals`, `Double`, `Custom`) | `Default` |
+| `--tag <text>` | `-t` | Add a label to the top border (e.g. `TODO`, `ALERT`, `INFO`, `NOTE`) | — |
+| `--length <n>` | `-l` | Total box width in characters | `80` |
+| `--indent <n>` | `-i` | Left side indentation spaces | `2` |
+| `--comment <pfx>` | `-C` | Prepend comment prefix to every line (e.g. `"//"`, `"#"`, `"--"`) | — |
+| `--file <path>` | `-f` | Read input text from a file instead of arguments or stdin | — |
+| `--copy` | `-c` | Explicitly copy result to clipboard | Auto |
+| `--no-copy` | — | Disable copying result to clipboard | — |
+| `--version` | `-v` | Show version number | — |
+| `--help` | `-h` | Show help menu | — |
+
+### Custom Border Characters (with `--style Custom`)
+You can override individual border characters using:
+`--tl`, `--tm`, `--tr` (top), `--l`, `--r` (sides), `--bl`, `--bm`, `--br` (bottom), `--dl`, `--dm`, `--dr` (dividers).
 
 ---
 
 ## ✨ Features
 
-- **Automatic Clipboard Copy**: By default, the generated box is automatically copied to your clipboard. This makes it incredibly easy to use in editors like WebStorm—just run the tool and press **Paste**.
-- **Shared Core**: Uses the same high-quality ASCII engine as the VS Code extension.
-- **Piping Support**: Works perfectly with Unix pipes (e.g., `echo "Log" | box-comment`).
+- **Comment Syntax Generation**: Use `-C "//"` or `-C "#"` to generate ready-to-paste comment blocks directly from your terminal.
+- **Smart Clipboard Copy**: Automatically copies in interactive terminals, while staying quiet and non-intrusive when piped or redirected.
+- **Shared Robust Core**: Unicode & emoji visual width alignment, divider support (`--`), and crash-proof word wrapping.
+- **Piping & File Support**: Works seamlessly with Unix pipes (`cat notes.txt | box-comment -s Hash`) and file reading (`-f notes.txt`).
 
 ---
 
