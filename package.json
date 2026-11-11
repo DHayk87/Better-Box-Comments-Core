@@ -11,7 +11,7 @@
         "LICENSE"
     ],
     "bin": {
-        "box-comment": "./bin/box-comment.js"
+        "box-comment": "bin/box-comment.js"
     },
     "keywords": [
         "comments",
@@ -28,7 +28,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/DHayk87/Better-Box-Comments-Core"
+        "url": "git+https://github.com/DHayk87/Better-Box-Comments-Core.git"
     },
     "bugs": {
         "url": "https://github.com/DHayk87/Better-Box-Comments-Core/issues"
