@@ -1,32 +1,35 @@
 name: Release to npm
 
 on:
-  push:
-    tags:
-      - "v*"
+    push:
+        tags:
+            - "v*"
 
 jobs:
-  publish:
-    name: Publish to npm
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    publish:
+        name: Publish to npm
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22.x
 
-      - name: Install dependencies
-        run: npm ci || npm install
+            - name: Update npm for OIDC support
+              run: npm install -g npm@latest
 
-      - name: Run test suite
-        run: npm test
+            - name: Install dependencies
+              run: npm ci || npm install
 
-      - name: Publish package
-        run: npm publish --provenance --access public
+            - name: Run test suite
+              run: npm test
+
+            - name: Publish package
+              run: npm publish --provenance --access public
